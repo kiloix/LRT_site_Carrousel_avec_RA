@@ -1,0 +1,90 @@
+<!DOCTYPE HTML>
+<html>
+<head>  
+  <title>LRT</title>
+
+  <link rel="shortcut icon" href="images/back-office.png">
+  <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" href="style.css">  
+</head>
+
+<body>  
+  <div id="main">
+    <header>      
+      <div id="logo">
+        <div id="logo_text">
+        <a href="http://www.fftri.com" target="_blank"><img src="images/logo_accueil.png" alt="Fédération Française de Triathlon"></a>
+          <h1><a href="..\index.html">BACK OFFICE DE LA LRT <span class="logo_colour">TRIATHLON</span></a></h1>
+          <h2>Ligue réunionnaise de triathlon</h2>					  
+        </div>
+      </div>
+      <nav>
+        <div id="menu_container">
+          <ul class="sf-menu" id="nav">
+            
+              
+            </li>
+            <li><a href="acceuilBO.html">Acceuil</a></li>
+            <li><a href="GestionClub.php">Gestion Des Clubs</a></li>
+            <li><a href="formAjoutTriathlete.html">Gestion Des Triathlètes</a></li>
+            <li><a href="formAjoutCategorieAge.html">Gestion Des Categories</a></li>													
+            <li><a href="../index.html">EXIT</a></li>
+
+          </ul>
+        </div>
+      </nav>
+  </header>
+    
+    <section>
+      <div id="site_content">
+        <div class="content">
+          <h1>Ajouter un Club</h1>
+          <form method="POST" action="ajoutTriathlete.php">
+            <fieldset>
+              <legend>Veuillez saisir les informations suivantes :</legend>
+
+
+              <label for="nom">N° de licence <span style="color:red">*</span> :</label> 
+              <input type="text" name="frm_licence" .><br/>
+
+              <label for="nom">Nom <span style="color:red">*</span> :</label> 
+              <input type="text" name="frm_nom" .><br/>
+
+              <label for="nom">Prenom<span style="color:red">*</span> :</label> 
+              <input type="text" name="frm_prenom" .><br/>
+
+              <label for="nom">Genre<span style="color:red">*</span> :</label> 
+              <input type="text" name="frm_genre" .><br/>
+
+              <label for="nom">adresse Rue<span style="color:red">*</span> :</label> 
+              <input type="text" name="frm_adresseRue" .><br/>
+
+              <label for="nom">code Postal<span style="color:red">*</span> :</label> 
+              <input type="text" name="frm_codePostal" .><br/>
+
+              <label for="ville">ville<span style="color:red">*</span> :</label> 
+              <input type="text" name="frm_ville" .><br/>
+
+              <label for="ville">dateNaissance<span style="color:red">*</span> :</label> 
+              <input type="date" name="frm_dateNaissance" .><br/>
+
+              <label for="ville">mail<span style="color:red">*</span> :</label> 
+              <input type="text" name="frm_mail" .><br/>
+
+              <label for="ville">code du Club<span style="color:red">*</span> :</label> 
+              <input type="text" name="frm_codeClub" .><br/>
+
+              <label for="ville">code de la Categorie<span style="color:red">*</span> :</label> 
+              <input type="text" name="frm_codeCategorie" .><br/>
+
+
+              <br/>
+              <input type="submit" class="button" value="Envoyer">
+            </fieldset>
+          </form>
+        </div>
+      </div>
+    </section>
+  </div>  
+</body>
+</html>

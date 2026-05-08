@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>LRT-Ligue Réunionnaise de Triathlon</title>
+		<link rel="shortcut icon" href="images/ico_LRT.png">
+		<meta charset="UTF-8" />
+		<link rel="stylesheet" type="text/css" href="styles/style.css" />
+	</head>
+
+	<body>
+		<div id="main">
+			<div id="main">
+				<header>			
+					<div id="logo">
+						<div id="logo_text">
+						<a href="http://www.fftri.com" target="_blank"><img src="images/FFTRI.png" alt="Fédération Française de Triathlon"></a>
+							<h1><a href="index.html">LIGUE RÉUNIONNAISE DE <span class="logo_colour">TRIATHLON</span></a></h1>
+							<h2>Île de la Réunion</h2>					  
+						</div>
+					</div>
+					<nav>
+						<div id="menu_container">
+							<ul class="sf-menu" id="nav">
+								<li><a href="index.html" >ACCUEIL</a></li>
+								<li><a href="#">LA LIGUE<span class="sf-arrow"></span></a>
+									<ul>
+										<li><a href="presentationLigue.html">Présentation</a></li>
+										<li><a href="origineTriathlon.html">Origine du Triathlon</a></li>
+									</ul>
+								</li>
+								<li><a href="annuaireClub.html">ANNUAIRE</a></li>
+								<li><a href="calendrierTriathlon.html">CALENDRIER</a></li>								
+								<li><a href="categorieAge-v4.html">CATEGORIE</a></li>
+								<li><a href="contact.html">CONTACT</a></li>
+							</ul>
+						</div>
+					</nav>
+				</header>		
+			<section>
+				<div id="site_content">
+					<div class="content">
+						<img style="float: left; vertical-align: middle; margin: 0 10px 0 0;" src="images/logoCategorie.png" alt="home" />
+						<h1 style="margin: 15px 0 0 0;">Votre catégorie d'âge en 2025 !</h1>
+						<br/><hr><br/>
+						<form name="formCategorie" method="POST" action="calculCat.php">
+						<!-- <form name="monForm" method="POST" action="monScript.php">
+								...
+								<input type="submit" value="Terminer">
+						</form> -->
+						<table>
+							<caption><h3>Veuillez saisir les informations suivantes SVP :</h3></caption>
+							<tr><th>Votre prénom :</th><td>	<input type="text" id="frm_" name="frm_prenom" required></td></tr>
+							<tr><th>Votre genre : </th><td>		<input type="radio" id="frm_genre" name="frm_genre" value="F">Femme
+																<input type="radio" id="frm_genre" name="frm_genre" value="M">Homme</td></tr>
+							<tr><th>Votre date de naissance : </th><td><input type="date" id="frm_anneeNaiss" name="frm_dateNaiss" required></td></tr>
+							<tr><th></th><td><input type="submit" class="button" value="Cliquer ici !"></td></tr>
+						</table>
+						</form>
+						<h3 id="resultat"></h3>
+						<img src="images/categorieTriathlon.jpg" class="logo"/>		
+					</div>
+				</div>
+			</section>					
+			<!-- Pied de la page -->
+			<footer>				
+				<p>Copyright &copy; LRT-SLAM 2025 | <a href="#">Ligue Réunionnaise de Triathlon</a><IMG  class="logo-pour-tria" style="float:right; vertical-align:middle; margin:5px 10px auto 0;"  src="images/LRT.png" /></p>
+
+			</footer>
+		</div>	  
+	</body>
+</html>
