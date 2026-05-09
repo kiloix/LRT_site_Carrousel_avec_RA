@@ -131,6 +131,14 @@
   </div>
 </div>
 
+          <?php
+          //navigation des news, par défaut valuer de l'id à 1.
+          $_GET['id'] = 1;
+          var_dump($_GET['id']);
+            $sql = "SELECT code, nom, adresseRue, codePostal, ville, nomPresident, numTelephone, mail FROM club";    
+            include "connexionServBD.php"; //la méthode include sert uniquement pour cette page php en dehors de la classe pour lire directment la BD
+?>
+______________________________________________________________________________
 <div class="bg-black py-vh-3">
   <div class="container bg-black px-vw-5 py-vh-3 rounded-5 shadow">
 
