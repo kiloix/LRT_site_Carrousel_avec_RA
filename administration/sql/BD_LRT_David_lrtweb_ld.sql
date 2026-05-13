@@ -26,14 +26,14 @@
   --
   -- Structure de la table `Utilisateurs`
   --
-  CREATE TABLE IF NOT EXISTS Utilisateurs (
-      'libelle' INT AUTO_INCREMENT ,
-      'nom' VARCHAR(50) NOT NULL,
-      'prenom' VARCHAR(50) NOT NULL,
-      'id' VARCHAR(50) NOT NULL,
-    'motdepasse' VARCHAR(50) NOT NULL
-  ) ENGINE=InnoDB DEFAULT CHARSET=UTF8MB4;
-  --
+CREATE TABLE IF NOT EXISTS Utilisateurs (
+    `libelle` INT AUTO_INCREMENT,
+    `nom` VARCHAR(50) NOT NULL,
+    `prenom` VARCHAR(50) NOT NULL,
+    `id` VARCHAR(50) NOT NULL,
+    `motdepasse` VARCHAR(50) NOT NULL,
+    PRIMARY KEY (`libelle`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;  --
   -- Déchargement des données de la table `Utilisateurs`
   --
   INSERT INTO `Utilisateurs` (`libelle`, `nom`, `prenom`, `id`, `motdepasse`) 
@@ -45,7 +45,8 @@
     `code` varchar(3) NOT NULL,
     `libelle` varchar(25) DEFAULT NULL,
     `ageDebut` smallint(6) DEFAULT NULL,
-    `ageFin` smallint(6) DEFAULT NULL
+    `ageFin` smallint(6) DEFAULT NULL,
+    PRIMARY KEY (`code`)
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
   --
@@ -75,7 +76,8 @@
     `nomPresident` varchar(50) DEFAULT NULL,
     `numTelephone` char(10) DEFAULT NULL,
     `mail` varchar(100) DEFAULT NULL,
-    `urlSiteWeb` varchar(100) DEFAULT NULL
+    `urlSiteWeb` varchar(100) DEFAULT NULL,
+    PRIMARY KEY (`code`)
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
   --
@@ -225,7 +227,7 @@
   -- Déchargement des données de la table `triathlon`
   --
 
-  INSERT INTO `competition` (`numero`, `nom`, `typeTriathlon`, `lieu`, `dateTriathlon`, `clubOrga`) VALUES
+  INSERT INTO `competition` (`code`, `nom`, `typeTriathlon`, `lieu`, `dateTriathlon`, `clubOrga`) VALUES
   (1, 'Triathlon des plaines', 'M', 'Plaines des cafres', '2024-08-12', '974CTPB'),
   (2, 'Triathlon Romaric', 'S', 'la plaine Saint-Paul', '2024-12-10', '974CNPO'),
   (3, 'Fèt Kaf Triathlon', 'XS', 'Saint-Denis', '2024-12-20', '974CAC'),
@@ -241,19 +243,19 @@
   --
   -- Index pour la table `Utilisateurs`
   --
-  ALTER TABLE `Utilisateurs`
-    ADD PRIMARY KEY (`libelle`);
-  --
-  -- Index pour la table `categorieAge`
-  --
-  ALTER TABLE `categorieAge`
-    ADD PRIMARY KEY (`code`);
+  -- ALTER TABLE `Utilisateurs`
+  --   ADD PRIMARY KEY (`libelle`);
+  -- --
+  -- -- Index pour la table `categorieAge`
+  -- --
+  -- ALTER TABLE `categorieAge`
+  --   ADD PRIMARY KEY (`code`);
 
-  --
-  -- Index pour la table `club`
-  --
-  ALTER TABLE `club`
-    ADD PRIMARY KEY (`code`);
+  -- --
+  -- -- Index pour la table `club`
+  -- --
+  -- ALTER TABLE `club`
+  --   ADD PRIMARY KEY (`code`);
 
   --
   -- Index pour la table `ddeInformation`
