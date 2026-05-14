@@ -236,7 +236,25 @@ CREATE TABLE IF NOT EXISTS Utilisateurs (
   (6, 'Triathlon des salines', 'S', 'Saint-Leu', '2025-04-23', '974LTC'),
   (7, 'Triathlon du Colosse', 'S', 'Saint-André', '2025-05-14', '974TCSA');
 
+CREATE TABLE `enregistrement` (
+    `id` INT AUTO_INCREMENT NOT NULL,
+    `nomAuteur` VARCHAR(50) DEFAULT NULL,
+    `datePublication` DATE DEFAULT NULL,
+    `description` VARCHAR(750) DEFAULT NULL,
+    `urlImage` VARCHAR(250) DEFAULT NULL,
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
   --
+  -- Déchargement des données de la table `enregistrement`
+  --
+
+INSERT INTO `enregistrement`
+(`description`, `nomAuteur`, `datePublication`)
+VALUES (
+    'Ouverture des Jeux Olympiques et Paralympiques de Paris 2024. Des manifestations diverses et variées où on retrouvait des disciplines traditionnelles et des sports innovants.',
+    'Andie THIEUMA',
+    '2024-07-30'
+);  --
   -- Index pour les tables déchargées
   --
 
@@ -279,6 +297,7 @@ CREATE TABLE IF NOT EXISTS Utilisateurs (
     ADD PRIMARY KEY (`numero`),
     ADD KEY `triathlonClubFK` (`clubOrga`);
 
+
   --
   -- AUTO_INCREMENT pour les tables déchargées
   --
@@ -298,10 +317,20 @@ CREATE TABLE IF NOT EXISTS Utilisateurs (
   --
   -- Contraintes pour les tables déchargées
   --
+  ALTER TABLE `competition`
+    ADD PRIMARY KEY `competionPK` (`code`);
 
+  ALTER TABLE `competition`
+    ADD KEY `competionFK` (`idEnregistrement`);
   --
   -- Contraintes pour la table `ddeInformation`
   --
+  ALTER TABLE `competition`
+    ADD CONSTRAINT `competitionFK` FOREIGN KEY (`idEnregistrement`) REFERENCES `enregistrement` (`id`);
+  --
+  -- Contraintes pour la table `ddeInformation`
+  --
+
   ALTER TABLE `ddeInformation`
     ADD CONSTRAINT `ddeInfoTriathleteFK` FOREIGN KEY (`idTriathlete`) REFERENCES `triathlete` (`id`),
     ADD CONSTRAINT `ddeInfoTriathlonFK` FOREIGN KEY (`numTriathlon`) REFERENCES `triathlon` (`numero`);

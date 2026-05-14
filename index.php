@@ -134,64 +134,52 @@
           <?php
           //navigation des news, par défaut valuer de l'id à 1.
           $_GET['id'] = 1;
-          var_dump($_GET['id']);
-            $sql = "SELECT code, nom, adresseRue, codePostal, ville, nomPresident, numTelephone, mail FROM club";    
-            include "connexionServBD.php"; //la méthode include sert uniquement pour cette page php en dehors de la classe pour lire directment la BD
-?>
-______________________________________________________________________________
-<div class="bg-black py-vh-3">
-  <div class="container bg-black px-vw-5 py-vh-3 rounded-5 shadow">
+          $sql = "SELECT nomAuteur, datePublication, description, urlImage  FROM enregistrement";    
+          include "connexionServBD_local.php"; //la méthode include sert uniquement pour cette page php en dehors de la classe pour lire directment la BD
+          $resultat = $bd->query($sql) or die (print_r($bd->errorInfo(), true));
+          // var_dump($resultat);
 
-  <div class="row gx-5">
-    <div class="col-12 col-md-6">
-      <div class="card bg-transparent mb-5" data-aos="zoom-in-up">
-        <div class="bg-dark shadow rounded-5 p-0">
-          <img src="img/jo2024.png" width="582" height="327" alt="abstract image" class="img-fluid rounded-5 no-bottom-radius" loading="lazy">
-          <div class="p-5">
-            <h4 class="fw-lighter">Ouverture des Jeux Olympiques et Paralympiques de Paris 2024. Des manifestations diverses et variées où on retrouvait des disciplines traditionnelles et des sports innovants.</h3>
-            <p class="pb-4 text-secondary">
-              Posté par : Andie THIEUMA le 30 Juillet 2024</p>
+            //Mise en place de la distributivité des news.
+            while ($ligne = $resultat->fetch()) 
+                {
+                  // Mise en place du défilement des boutosn pour le carrousel. J'aligne les boutons et les news.
+                  echo `<table>
+                                      <th><a href="consulterClub.php?codeClub="`.$_GET['id']+=1."``"`><img src=images/icon-MODIF.png class="logo">Modifier un club</a></th>
+                    <th>`;
+      echo '       
+        <div class="card bg-transparent" data-aos="zoom-in-up">
+          <div class="bg-dark shadow rounded-5 p-0">
+
+            <img src="'.$ligne["urlImage"].'" width="582" height="327" alt="abstract image" class="img-fluid rounded-5 no-bottom-radius" loading="lazy">
+            <div class="p-5">
+              <h4 class="fw-lighter"> '.$ligne["description"].'</h3>
+              <p class="pb-4 text-secondary">
+                          Posté par : '.$ligne["nomAuteur"].' le '.$ligne["datePublication"].'</p>
+            
             
           </div>
         </div>
       </div>
+      </th>';
+    echo'<th></th>
+      </table>';  
+      
+      } 
+      ?> 
+      <!-- Le reste sera pour les privilèges utilsiateurs -->
+                    <!-- '.$ligne["nom"].'
+                    
+                   
+                   
+                    <a href="consulterClub.php?codeClub='.$ligne['code'].'><img src=images/icon-MODIF.png class="logo">Modifier un club</a>
+                    <a href="supprimerClub.php?codeClub='.$ligne['code'].'><img src=images/icon-SUPP.png class="logo">Supprimer un club</a>
+                </tr>'; -->
 
-      <div class="card bg-transparent" data-aos="zoom-in-up">
-        <div class="bg-dark shadow rounded-5 p-0">
-          <img src="img/sportAuFeminin.jpg" width="582" height="442" alt="abstract image" class="img-fluid rounded-5 no-bottom-radius" loading="lazy">
-          <div class="p-5">
-            <h4 class="fw-lighter">Sportez-vous au féminin. Les participantes ont eu la chance de participer de nombreuses activités comme le zodiac, la pirogue et le tchoukball."
-            </h4>
-            <p class="pb-4 text-secondary">Posté par : Pascale HONNEUR en date du 07 et 08 Aout 2022</p>
-            
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="col-12 col-md-6">
-      <div class="p-5 pt-0 mt-5" data-aos="fade">
-        <span class="h5 text-secondary fw-lighter">Voici les dernières news:</span>
-        
-      </div>
-      <div class="card bg-transparent mb-5 mt-5" data-aos="zoom-in-up">
-        <div class="bg-dark shadow rounded-5 p-0">
-          <img src="img/caravaneSport.png" width="582" height="390" alt="abstract image" class="img-fluid rounded-5 no-bottom-radius" loading="lazy">
-          <div class="p-5">
-            <h4 class="fw-lighter">C’est dans le cadre du Label Terre de Jeux 2024 que le CROS et la ville du Tampon ont organisé la Caravane des Sports ce mercredi 26 juillet au Complexe sportif de Trois Mares. Cette action avait pour objectif de promouvoir le sport auprès des jeunes et des familles</h2>
-            <p class="pb-4 text-secondary">Posté par : Henri BIENFAITEUR en date du 26 Juillet 2023</p>
-            
-          </div>
-        </div>
-      </div>
 
-        </div>
-      </div>
-    </div>
-  </div>
 
-</div>
 
-</div>
+
+
 
 
 
