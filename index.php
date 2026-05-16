@@ -1,4 +1,6 @@
-
+<?php
+session_start();
+?>
 <!doctype html>
 <html class="h-100" lang="en">
 
@@ -68,7 +70,7 @@
 
     <nav id="navScroll" class="navbar navbar-dark bg-black fixed-top px-vw-5" tabindex="0">
   <div class="container">
-    <a class="navbar-brand pe-md-4 fs-4 col-12 col-md-auto text-center" href="index.html">
+    <a class="navbar-brand pe-md-4 fs-4 col-12 col-md-auto text-center" href="index.php">
     <img src="img/MS2R_Logo.png" width="58" height="58" alt="abstract image" class="img-fluid rounded-5" loading="lazy">
   </svg>
   <span class="ms-md-1 mt-1 fw-bolder me-md-5">MS2R</span>
@@ -76,7 +78,7 @@
 
       <ul class="navbar-nav mx-auto mb-2 mb-lg-0 list-group list-group-horizontal">
       <li class="nav-item">
-  <a class="nav-link fs-5" href="index.html" aria-label="Homepage">
+  <a class="nav-link fs-5" href="index.php" aria-label="Homepage">
     Accueil
   </a>
 </li>
@@ -132,39 +134,77 @@
 </div>
 
           <?php
-          //navigation des news, par défaut valuer de l'id à 1.
-          $_GET['id'] = 1;
-          $sql = "SELECT nomAuteur, datePublication, description, urlImage  FROM enregistrement";    
+
+          //navigation des news, par défaut valeur de l'id à 1.
+          if (!isset($_GET['id'])||($_GET['id']<=0)){
+            $_GET['id'] = 1;
+            // $_SESSION['id']=1;
+          }
+          var_dump($_GET['id']);
+          $id = 1;
+          $sql = "SELECT nomAuteur, datePublication, description, urlImage  FROM enregistrement WHERE id ='".$_GET['id']."'";    
           include "connexionServBD_local.php"; //la méthode include sert uniquement pour cette page php en dehors de la classe pour lire directment la BD
           $resultat = $bd->query($sql) or die (print_r($bd->errorInfo(), true));
+          $sqlCount = "SELECT COUNT(*) FROM enregistrement";    
+          $resultat2 = $bd->query($sqlCount) or die (print_r($bd->errorInfo(), true));
+                    var_dump($resultat2->fetchColumn(0));
+
           // var_dump($resultat);
 
             //Mise en place de la distributivité des news.
-            while ($ligne = $resultat->fetch()) 
-                {
+while ($ligne = $resultat->fetch()) 
+    {
                   // Mise en place du défilement des boutosn pour le carrousel. J'aligne les boutons et les news.
-                  echo `<table>
-                                      <th><a href="consulterClub.php?codeClub="`.$_GET['id']+=1."``"`><img src=images/icon-MODIF.png class="logo">Modifier un club</a></th>
-                    <th>`;
-      echo '       
-        <div class="card bg-transparent" data-aos="zoom-in-up">
-          <div class="bg-dark shadow rounded-5 p-0">
+//Limite de l'id
 
-            <img src="'.$ligne["urlImage"].'" width="582" height="327" alt="abstract image" class="img-fluid rounded-5 no-bottom-radius" loading="lazy">
-            <div class="p-5">
-              <h4 class="fw-lighter"> '.$ligne["description"].'</h3>
-              <p class="pb-4 text-secondary">
-                          Posté par : '.$ligne["nomAuteur"].' le '.$ligne["datePublication"].'</p>
-            
-            
-          </div>
-        </div>
-      </div>
-      </th>';
-    echo'<th></th>
-      </table>';  
-      
+    echo ' <table> 
+    <th> <a href="index.php?id=';
+    if ($_GET['id'] > 1){
+      echo $_GET['id']  - 1;
+    }
+    else{
+      echo $_GET['id']=1;
       } 
+    echo '">
+            <img src="images/icon-MODIF.png" class="logo">
+            Modifier un club
+          </a>
+          </th>
+          <th>';
+
+          echo '       
+            <div class="card bg-transparent" data-aos="zoom-in-up">
+              <div class="bg-dark shadow rounded-5 p-0">
+
+                <img src="'.$ligne["urlImage"].'" width="582" height="327" alt="abstract image" class="img-fluid rounded-5 no-bottom-radius" loading="lazy">
+                <div class="p-5">
+                  <h4 class="fw-lighter"> '.$ligne["description"].'</h3>
+                  <p class="pb-4 text-secondary">
+                              Posté par : '.$ligne["nomAuteur"].' le '.$ligne["datePublication"].'</p>
+                
+                
+              </div>
+            </div>
+          </div>
+          </th>';
+        echo'<th><a href="index.php?id=';
+        $idMax = $resultat2->fetchColumn(0);
+        if($_GET['id']>$idMax){
+          // print 'Limite des actualités dépassée';
+          echo $_GET['id']-- ;
+        }
+        else{
+          echo $_GET['id']++ ;
+        };
+        
+        
+        echo '">
+            <img src="images/icon-MODIF.png" class="logo">
+            Modifier un club
+          </a></th>
+          </table>';  
+          
+          } 
       ?> 
       <!-- Le reste sera pour les privilèges utilsiateurs -->
                     <!-- '.$ligne["nom"].'
