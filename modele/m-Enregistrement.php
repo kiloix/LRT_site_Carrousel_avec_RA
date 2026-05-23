@@ -1,19 +1,22 @@
 <?php
-
-class Competition
+class Enregistrement
 {
     //Déclaration des attributs de la classe
     private $_id;                 //l'identifiant du club
     private $_titre;
     private $_date;
+    private $_description;
+    private $_url;
     private $_nom;
 
     //Déclaration du constructeur
-    public function __construct($idTuples, $titreTuples,  $dateDebutCompetition, $nomAuteur)    // A compléter
+    public function __construct($idTuples, $titreTuples,  $descriptionTuple, $urlImage, $nomAuteur, $dateDebut)    // A compléter
     {
         $this->_id = $idTuples;       // Initialisation de l'identifiant de cet objet
         $this->_titre = $titreTuples;
-        $this->_date = $dateDebutCompetition;
+        $this->_description = $descriptionTuple;
+        $this->_url = $urlImage;
+        $this->_date = $dateDebut;
         $this->_nom = $nomAuteur;
     }
     
@@ -37,28 +40,23 @@ class Competition
     }
 
     // Recuperation et affichage d'un club saisis dans un formulaire.
-    public function retrieve()//argument $codeClub
+    public function retrieve($id)
     {
-        require_once "connexionServBD.php";
-        
-        // $sql = "SELECT (nom, adresseRue, codePostal, ville, nomPresident, numTelephone) FROM club WHERE code='".$this->_code; 
+        require_once "connexionServBD_local2.php";
         //On va devoir faire $this->_trucmuche
         echo "récuperation de la BD ";
-        $sql = "SELECT code, nom, adresseRue, codePostal, ville, nomPresident, numTelephone, mail FROM club WHERE code='" . $_GET['codeClub'] . "'";
+        $sql = "SELECT nomAuteur, datePublication, description, urlImage  FROM enregistrement WHERE id ='".$id."'";
 
-        $resultat = $bd->query($sql) or die (print_r($bd->errorInfo(), true));
+        $resultat = $bd2->query($sql) or die (print_r($bd2->errorInfo(), true));
         $ligne = $resultat->fetch(); // <- important fetch c'est bo ntant que $ligne existe
         // $codeClub = $ligne['code'];
-        $this->_code = $ligne['code'];      
-        $this->_nom = $ligne['nom']; 
-        $this->_adresseRue = $ligne['adresseRue'];
-        $this->_codePostal = $ligne['codePostal'];
-        $this->_ville = $ligne['ville'];
-        $this->_nomPresident = $ligne['nomPresident'];
-        $this->_numTelephone = $ligne['numTelephone'];
-        $this->_mail = $ligne['mail'];
-        // echo $ligne['code'];
+        // $this->_id = $ligne['code'];      
+        $this->_url = $ligne["urlImage"];
+        $this->_nom = $ligne["nomAuteur"];
+        $this->_date = $ligne["datePublication"];
+        $this->_description = $ligne["description"];
     }
+    
     public function update($codeClub){
         require_once "connexionServBD.php";
         //il faut envoyer nouvelle données du $POST.
@@ -74,21 +72,25 @@ class Competition
         return $this->_id; //Affichage de données de formulaire
     }  
 
-    public function getTitre() {//argument $codeClub
-        return $this->_nom;
+    public function getTitre() {
+        return $this->_titre;
     }
 
-    public function getDescription()//argument $codeClub
+    public function getDescription()
         {
-            return $this->_dateDebut;
+            return $this->_description;
         }
-    public function getDatePublication()//argument $codeClub
+    public function getDatePublication()
         {
-            return $this->_codePostal;
+            return $this->_date;
         }
-    public function getNomAuteur()//argument $codeClub
+    public function getNomAuteur()
         {
-            return $this->_ville;
+            return $this->_nom;
+        }
+    public function getUrlImage()
+        {
+            return $this->_url;
         }
     public function retreive(){
 

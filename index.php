@@ -1,219 +1,27 @@
 <?php
 session_start();
 ?>
-<!doctype html>
-<html class="h-100" lang="en">
-
-  <head>
-      <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
-  <meta name="description" content="A well made and handcrafted Bootstrap 5 template">
-  <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
-  <link rel="icon" type="image/png" sizes="96x96" href="img/favicon.png">
-  <meta name="author" content="Holger Koenemann">
-  <meta name="generator" content="Eleventy v2.0.0">
-  <meta name="HandheldFriendly" content="true">
-  <title>Site de la MS2R</title>
-  <link rel="stylesheet" href="css/theme.min.css">
-
-   <style>
-
-/* inter-300 - latin */
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 300;
-  font-display: swap;
-  src: local(''),
-       url('fonts/inter-v12-latin-300.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-       url('fonts/inter-v12-latin-300.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-}
-
-/* inter-400 - latin */
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: local(''),
-       url('fonts/inter-v12-latin-regular.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-       url('fonts/inter-v12-latin-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-}
-
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: local(''),
-       url('fonts/inter-v12-latin-500.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-       url('fonts/inter-v12-latin-500.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-}
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: local(''),
-       url('fonts/inter-v12-latin-700.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-       url('fonts/inter-v12-latin-700.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-}
-
-</style>
-
-
-  </head>
-
-  <body class="bg-black text-white mt-0" data-bs-spy="scroll" data-bs-target="#navScroll">
-
-    <nav id="navScroll" class="navbar navbar-dark bg-black fixed-top px-vw-5" tabindex="0">
-  <div class="container">
-    <a class="navbar-brand pe-md-4 fs-4 col-12 col-md-auto text-center" href="index.php">
-    <img src="img/MS2R_Logo.png" width="58" height="58" alt="abstract image" class="img-fluid rounded-5" loading="lazy">
-  </svg>
-  <span class="ms-md-1 mt-1 fw-bolder me-md-5">MS2R</span>
-</a>
-
-      <ul class="navbar-nav mx-auto mb-2 mb-lg-0 list-group list-group-horizontal">
-      <li class="nav-item">
-  <a class="nav-link fs-5" href="index.php" aria-label="Homepage">
-    Accueil
-  </a>
-</li>
-<li class="nav-item">
-  <a class="nav-link fs-5" href="membres_dyn.php" aria-label="A sample content page">
-    Membres
-  </a>
-</li>
-
-</li>
-
-    </ul>
-</div>
-</nav>
-
-    <main>
-      <div class="w-100 overflow-hidden position-relative bg-black text-white" data-aos="fade">
-  <div class="position-absolute w-100 h-100 bg-black opacity-75 top-0 start-0"></div>
-  <div class="container py-vh-4 position-relative mt-5 px-vw-5 text-center">
-  <div class="row d-flex align-items-center justify-content-center py-vh-5">
-    <div class="col-12 col-xl-10">
-      <span class="h5 text-secondary fw-lighter">Bienvenue sur le site de la</span>
-      <h1 class="display-huge mt-3 mb-3 lh-1">Maison Régionale des Sports de la Réunion</h1>
-    </div>
-    <div class="col-12 col-xl-8">
-    </div>
-    <div class="col-12 text-center">
-      
-    </div>
-  </div>
-</div>
-
-</div>
-
-<div class="w-100 position-relative bg-black text-white bg-cover d-flex align-items-center">
-  <div class="container-fluid px-vw-5">
-    <div class="position-absolute w-100 h-50 bg-dark bottom-0 start-0"></div>
-    <div class="row d-flex align-items-center position-relative justify-content-center px-0 g-5">
-      <div class="col-12 col-lg-6">
-        <img src="img/MS2R_batiment.png" width="2280" height="1732" alt="abstract image" class="img-fluid position-relative rounded-5 shadow" data-aos="fade-up">
-      </div>
-    </div>
-  </div>
-</div>
-<div class="bg-dark">
-  <div class="container px-vw-5 py-vh-5">
-    <div class="row d-flex align-items-center">
-      <div class="col-12 col-lg-7 text-lg-end" data-aos="fade-right">
-        
-        </h2>
-      </div>
-  </div>
-</div>
 
           <?php
+include "menu.html";
 
-          //navigation des news, par défaut valeur de l'id à 1.
-          if (!isset($_GET['id'])||($_GET['id']<=0)){
-            $_GET['id'] = 1;
-            // $_SESSION['id']=1;
-          }
-          var_dump($_GET['id']);
-          $id = 1;
-          $sql = "SELECT nomAuteur, datePublication, description, urlImage  FROM enregistrement WHERE id ='".$_GET['id']."'";    
-          include "connexionServBD_local.php"; //la méthode include sert uniquement pour cette page php en dehors de la classe pour lire directment la BD
-          $resultat = $bd->query($sql) or die (print_r($bd->errorInfo(), true));
-          $sqlCount = "SELECT COUNT(*) FROM enregistrement";    
-          $resultat2 = $bd->query($sqlCount) or die (print_r($bd->errorInfo(), true));
-                    var_dump($resultat2->fetchColumn(0));
+if(isset ($_GET["action"])&& isset($_GET["modele"])){
+    $action = strtolower($_GET['action']);
+    $modele = strtolower($_GET['modele']);
 
-          // var_dump($resultat);
+}else{
+    $action='init';
+}
 
-            //Mise en place de la distributivité des news.
-while ($ligne = $resultat->fetch()) 
-    {
-                  // Mise en place du défilement des boutosn pour le carrousel. J'aligne les boutons et les news.
-//Limite de l'id
+include 'controleur/a-'.$action.'.php'; 
+//modele ici
+// include 'modele/m-'.$modele.'.php'; 
 
-    echo ' <table> 
-    <th> <a href="index.php?id=';
-    if ($_GET['id'] > 1){
-      echo $_GET['id']  - 1;
-    }
-    else{
-      echo $_GET['id']=1;
-      } 
-    echo '">
-            <img src="images/icon-MODIF.png" class="logo">
-            Modifier un club
-          </a>
-          </th>
-          <th>';
 
-          echo '       
-            <div class="card bg-transparent" data-aos="zoom-in-up">
-              <div class="bg-dark shadow rounded-5 p-0">
+include 'vue/v-'.$etat.'.php'; 
 
-                <img src="'.$ligne["urlImage"].'" width="582" height="327" alt="abstract image" class="img-fluid rounded-5 no-bottom-radius" loading="lazy">
-                <div class="p-5">
-                  <h4 class="fw-lighter"> '.$ligne["description"].'</h3>
-                  <p class="pb-4 text-secondary">
-                              Posté par : '.$ligne["nomAuteur"].' le '.$ligne["datePublication"].'</p>
-                
-                
-              </div>
-            </div>
-          </div>
-          </th>';
-        echo'<th><a href="index.php?id=';
-        $idMax = $resultat2->fetchColumn(0);
-        if($_GET['id']>$idMax){
-          // print 'Limite des actualités dépassée';
-          echo $_GET['id']-- ;
-        }
-        else{
-          echo $_GET['id']++ ;
-        };
-        
-        
-        echo '">
-            <img src="images/icon-MODIF.png" class="logo">
-            Modifier un club
-          </a></th>
-          </table>';  
-          
-          } 
-      ?> 
-      <!-- Le reste sera pour les privilèges utilsiateurs -->
-                    <!-- '.$ligne["nom"].'
-                    
-                   
-                   
-                    <a href="consulterClub.php?codeClub='.$ligne['code'].'><img src=images/icon-MODIF.png class="logo">Modifier un club</a>
-                    <a href="supprimerClub.php?codeClub='.$ligne['code'].'><img src=images/icon-SUPP.png class="logo">Supprimer un club</a>
-                </tr>'; -->
+
+?>
 
 
 
@@ -221,65 +29,3 @@ while ($ligne = $resultat->fetch())
 
 
 
-
-
-    <footer class="bg-black border-top border-dark">
-  <div class="container py-vh-4 text-secondary fw-lighter">
-    <div class="row">
-      <div class="col-12 col-lg-5 py-4 text-center text-lg-start">
-      <a class="nav-link fs-5" href="system.html" aria-label="A system message page">
-    <img src="img/MS2R_Logo.png" width="58" height="58" alt="abstract image" class="img-fluid rounded-5" loading="lazy">
-  </svg>
-  <span class="ms-md-1 mt-1 fw-bolder me-md-5">MS2R</span>
-</a>
-
-      </div>
-      <div class="col border-end border-dark">
-        <span class="h6">Lien important</span>
-<ul class="nav flex-column">
-  <li class="nav-item">
-    <a href="mentions.html" class="link-fancy link-fancy-light">Mentions Légales</a>
-  </li>
- 
-  </li>
-</ul>
-
-      </div>
-    </div>
-  </div>
-</footer>
-
-
-
-
-
-
-
-
-<script src="js/bootstrap.bundle.min.js"></script>
-<script src="js/aos.js"></script>
-<script>
-AOS.init({
- duration: 800, // values from 0 to 3000, with step 50ms
-});
-</script>
-<script>
-  let scrollpos = window.scrollY
-  const header = document.querySelector(".navbar")
-  const header_height = header.offsetHeight
-
-  const add_class_on_scroll = () => header.classList.add("scrolled", "shadow-sm")
-  const remove_class_on_scroll = () => header.classList.remove("scrolled", "shadow-sm")
-
-  window.addEventListener('scroll', function() {
-    scrollpos = window.scrollY;
-
-    if (scrollpos >= header_height) { add_class_on_scroll() }
-    else { remove_class_on_scroll() }
-
-    console.log(scrollpos)
-  })
-</script>
-
-  </body>
-</html>
