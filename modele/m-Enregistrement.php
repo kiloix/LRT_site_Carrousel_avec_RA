@@ -42,12 +42,11 @@ class Enregistrement
     // Recuperation et affichage d'un club saisis dans un formulaire.
     public function retrieve($id)
     {
-        require_once "connexionServBD_local2.php";
+        require_once "connexionServBD_local.php";
         //On va devoir faire $this->_trucmuche
-        echo "récuperation de la BD ";
         $sql = "SELECT nomAuteur, datePublication, description, urlImage  FROM enregistrement WHERE id ='".$id."'";
 
-        $resultat = $bd2->query($sql) or die (print_r($bd2->errorInfo(), true));
+        $resultat = $bd->query($sql) or die (print_r($bd->errorInfo(), true));
         $ligne = $resultat->fetch(); // <- important fetch c'est bo ntant que $ligne existe
         // $codeClub = $ligne['code'];
         // $this->_id = $ligne['code'];      

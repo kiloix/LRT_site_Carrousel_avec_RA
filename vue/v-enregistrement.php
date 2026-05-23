@@ -13,10 +13,9 @@ include 'modele/m-Enregistrement.php';
           $id  = $_GET['id'];
           // $sql = "SELECT nomAuteur, datePublication, description, urlImage  FROM enregistrement WHERE id ='".$_GET['id']."'";    
           include "connexionServBD_local2.php"; //la méthode include sert uniquement pour cette page php en dehors de la classe pour lire directment la BD
-          // $resultat = $bd->query($sql) or die (print_r($bd->errorInfo(), true));
-          // $sqlCount = "SELECT COUNT(*) FROM enregistrement";    
-          // $resultat2 = $bd2->query($sqlCount) or die (print_r($bd2->errorInfo(), true)) ;
-          //           var_dump($resultat2->fetchColumn(0));
+          $sqlCount = "SELECT COUNT(*) FROM enregistrement";    
+          $resultat2 = $bd2->query($sqlCount) or die (print_r($bd2->errorInfo(), true)) ;
+                    var_dump($resultat2->fetchColumn(0));
           $consulterTuple = new Enregistrement($id, NULL, NULL, NULL, NULL, NULL);
           $consulterTuple->retrieve($id);
           // var_dump($resultat);
@@ -58,13 +57,14 @@ include 'modele/m-Enregistrement.php';
           </div>
           </th>';
         echo'<th><a href="index.php?id=';
-        // $idMax = $resultat2->fetchColumn(0);
-        if($_GET['id']>$idMax){
+        $idMax = (int) $resultat2->fetchColumn(0);
+        $id =  (int) $_GET['id'] ;
+        if($id>$idMax){
           // print 'Limite des actualités dépassée';
-          echo $_GET['id']-- ;
+          echo $id -- ;
         }
         else{
-          echo $_GET['id']++ ;
+          echo $id++ ;
         };
         
         
