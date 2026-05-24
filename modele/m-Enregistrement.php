@@ -91,9 +91,6 @@ class Enregistrement
         {
             return $this->_url;
         }
-    public function retreive(){
-
-    }
     public function delete($codeClub)
         {
             require_once "connexionServBD.php";

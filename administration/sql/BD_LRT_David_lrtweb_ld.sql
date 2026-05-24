@@ -244,6 +244,15 @@ CREATE TABLE `enregistrement` (
     `urlImage` VARCHAR(250) DEFAULT NULL,
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE `enregistrement` (
+    `id` INT AUTO_INCREMENT NOT NULL,
+    `nomAuteur` VARCHAR(50) DEFAULT NULL,
+    `datePublication` DATE DEFAULT NULL,
+    `description` VARCHAR(750) DEFAULT NULL,
+    `urlImage` VARCHAR(250) DEFAULT NULL,
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
   --
   -- Déchargement des données de la table `enregistrement`
   --

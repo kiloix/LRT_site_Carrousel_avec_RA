@@ -9,13 +9,12 @@ include 'modele/m-Enregistrement.php';
             $_GET['id'] = 1;
             // $_SESSION['id']=1;
           }
-          var_dump($_GET['id']);
           $id  = $_GET['id'];
           // $sql = "SELECT nomAuteur, datePublication, description, urlImage  FROM enregistrement WHERE id ='".$_GET['id']."'";    
           include "connexionServBD_local2.php"; //la méthode include sert uniquement pour cette page php en dehors de la classe pour lire directment la BD
           $sqlCount = "SELECT COUNT(*) FROM enregistrement";    
           $resultat2 = $bd2->query($sqlCount) or die (print_r($bd2->errorInfo(), true)) ;
-                    var_dump($resultat2->fetchColumn(0));
+      
           $consulterTuple = new Enregistrement($id, NULL, NULL, NULL, NULL, NULL);
           $consulterTuple->retrieve($id);
           // var_dump($resultat);
@@ -56,24 +55,27 @@ include 'modele/m-Enregistrement.php';
             </div>
           </div>
           </th>';
-        echo'<th><a href="index.php?id=';
-        $idMax = (int) $resultat2->fetchColumn(0);
-        $id =  (int) $_GET['id'] ;
-        if($id>$idMax){
-          // print 'Limite des actualités dépassée';
-          echo $id -- ;
-        }
-        else{
-          echo $id++ ;
-        };
+    //Pas faire de var_dump car risque d'altération des données.
+    // var_dump($resultat2->fetchColumn(0));
+
+    $idMax =  $resultat2->fetchColumn(0);
+    $id = isset($_GET['id']) ? (int) $_GET['id'] : 1;
+
+    if ($id >= $idMax) {
+        $idLien = $idMax;
+    } else {
+        $idLien = $id + 1;
+    }
+
+      echo '<th><a href="index.php?id=' . $idLien . '">';        
         
-        
-        echo '">
-            <img src="images/icon-MODIF.png" class="logo">
+        echo '<img src="images/icon-MODIF.png" class="logo">
             Modifier un club
           </a></th>
           </table>';  
-          
+                            // var_dump($_GET['id']);
+                            // var_dump($idMax);
+
           // } 
           include "footer.html";
 
