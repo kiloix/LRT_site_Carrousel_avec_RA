@@ -1,23 +1,23 @@
 <?php
-class Enregistrement
+class Competition
 {
     //Déclaration des attributs de la classe
     private $_id;                 //l'identifiant du club
-    private $_titre;
-    private $_date;
-    private $_description;
-    private $_url;
     private $_nom;
+    private $_ville;
+    private $_date;
+    private $_club;
+    private $_sponsor;
 
     //Déclaration du constructeur
-    public function __construct($idTuples, $titreTuples,  $descriptionTuple, $urlImage, $nomAuteur, $dateDebut)    // A compléter
+    public function __construct($idCompet,  $villeCompet,   $nomCompet, $dateDebut, $nomClub, $nomSponsor)    // A compléter
     {
-        $this->_id = $idTuples;       // Initialisation de l'identifiant de cet objet
-        $this->_titre = $titreTuples;
-        $this->_description = $descriptionTuple;
-        $this->_url = $urlImage;
+        $this->_id = $idCompet;       // Initialisation de l'identifiant de cet objet
         $this->_date = $dateDebut;
-        $this->_nom = $nomAuteur;
+        $this->_ville = $villeCompet;
+        $this->_nom = $nomCompet;
+        $this->_club = $nomClub;
+        $this->_sponsor = $nomSponsor;
     }
     
 
@@ -35,31 +35,20 @@ class Enregistrement
         
     }
 
-        public function verif($id)
-    {
-        require "connexionServBD_local4.php";
-        $sql4 = 'SELECT COUNT(code) FROM competition
-        INNER JOIN enregistrement ON enregistrement.id= competition.idEnregistrement 
-        WHERE competition.idEnregistrement ='.$id.' ; ';
-        $resultat4 = $bd4->query($sql4) or die (print_r($bd4->errorInfo(), true)) ;
-        return $resultat4->fetchColumn(0);
-    }
-
     // Recuperation et affichage d'un club saisis dans un formulaire.
     public function retrieve($id)
     {
-        require_once "connexionServBD_local.php";
-        //On va devoir faire $this->_trucmuche
-        $sql = "SELECT nomAuteur, datePublication, description, urlImage  FROM enregistrement WHERE id ='".$id."'";
+        require "connexionServBD_local.php";
+        $sql = "SELECT code, ville, nom, idClub, dateDebut, idSponsor  FROM competition WHERE idEnregistrement ='".$id."'";
 
         $resultat = $bd->query($sql) or die (print_r($bd->errorInfo(), true));
         $ligne = $resultat->fetch(); // <- important fetch c'est bo ntant que $ligne existe
-        // $codeClub = $ligne['code'];
-        // $this->_id = $ligne['code'];      
-        $this->_url = $ligne["urlImage"];
-        $this->_nom = $ligne["nomAuteur"];
-        $this->_date = $ligne["datePublication"];
-        $this->_description = $ligne["description"];
+        $this->_id = $ligne['code'];      
+        $this->_ville = $ligne["ville"];
+        $this->_nom = $ligne["nom"];
+        $this->_club = $ligne["idClub"];
+        $this->_date = $ligne["dateDebut"];
+        $this->_sponsor = $ligne["idSponsor"];
     }
     
     public function update($codeClub){
@@ -77,25 +66,26 @@ class Enregistrement
         return $this->_id; //Affichage de données de formulaire
     }  
 
-    public function getTitre() {
-        return $this->_titre;
-    }
 
-    public function getDescription()
-        {
-            return $this->_description;
-        }
-    public function getDatePublication()
+    public function getDateDebut()
         {
             return $this->_date;
         }
-    public function getNomAuteur()
+    public function getClub()
+        {
+            return $this->_club;
+        }
+    public function getNomCompetition()
         {
             return $this->_nom;
         }
-    public function getUrlImage()
+    public function getVille()
         {
-            return $this->_url;
+            return $this->_ville;
+        }
+    public function getSponsor()
+        {
+            return $this->_sponsor;
         }
     public function delete($codeClub)
         {

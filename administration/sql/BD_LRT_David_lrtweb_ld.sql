@@ -38,6 +38,10 @@ CREATE TABLE IF NOT EXISTS Utilisateurs (
   --
   INSERT INTO `Utilisateurs` (`libelle`, `nom`, `prenom`, `id`, `motdepasse`) 
   VALUES (NULL, "cocanalp", "jean-marc", 'jm.Cocanalp%2', SHA1('12-Soleil&BOLRT'));
+  INSERT INTO `Utilisateurs` (`libelle`, `nom`, `prenom`, `id`, `motdepasse`,`habil` ) 
+  VALUES (NULL, "Test", "jean-marc", 'Test', SHA1('lol'), 'E');
+  INSERT INTO `Utilisateurs` (`libelle`, `nom`, `prenom`, `id`, `motdepasse`,`habil` ) 
+  VALUES (NULL, "Test", "jean-marc", 'Test2', SHA1('lol'), 'A');
   -- Structure de la table `categorieAge`
   --
 
@@ -217,7 +221,6 @@ CREATE TABLE IF NOT EXISTS Utilisateurs (
   CREATE TABLE `competition` (
     `code` smallint(6) NOT NULL,
     `nom` varchar(50) DEFAULT NULL,
-    -- `dateDebut` date DEFAULT,
     `ville` varchar(50) DEFAULT NULL,
     `idEnregistrement` smallint(6) DEFAULT NULL,
     `idClub` smallint(6) DEFAULT NULL
@@ -227,14 +230,8 @@ CREATE TABLE IF NOT EXISTS Utilisateurs (
   -- Déchargement des données de la table `triathlon`
   --
 
-  INSERT INTO `competition` (`code`, `nom`, `typeTriathlon`, `lieu`, `dateTriathlon`, `clubOrga`) VALUES
-  (1, 'Triathlon des plaines', 'M', 'Plaines des cafres', '2024-08-12', '974CTPB'),
-  (2, 'Triathlon Romaric', 'S', 'la plaine Saint-Paul', '2024-12-10', '974CNPO'),
-  (3, 'Fèt Kaf Triathlon', 'XS', 'Saint-Denis', '2024-12-20', '974CAC'),
-  (4, 'Triathlon vert Lagon', 'XS', 'Saint-Gilles', '2025-02-26', '974TCSD'),
-  (5, 'Triathlon de Salazie', 'S', 'Bras Panon', '2025-03-12', '974CTPB'),
-  (6, 'Triathlon des salines', 'S', 'Saint-Leu', '2025-04-23', '974LTC'),
-  (7, 'Triathlon du Colosse', 'S', 'Saint-André', '2025-05-14', '974TCSA');
+  INSERT INTO `competition` (`code`, `ville`, `nom`,  `dateDebut`, `idClub`,`idEnregistrement`) VALUES
+  (1, 'Saint-Denis', 'Les ZeyZey', '2026-01-01',  '974CTPB', 1);
 
 CREATE TABLE `enregistrement` (
     `id` INT AUTO_INCREMENT NOT NULL,
@@ -245,14 +242,6 @@ CREATE TABLE `enregistrement` (
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `enregistrement` (
-    `id` INT AUTO_INCREMENT NOT NULL,
-    `nomAuteur` VARCHAR(50) DEFAULT NULL,
-    `datePublication` DATE DEFAULT NULL,
-    `description` VARCHAR(750) DEFAULT NULL,
-    `urlImage` VARCHAR(250) DEFAULT NULL,
-    PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
   --
   -- Déchargement des données de la table `enregistrement`
   --
@@ -269,9 +258,27 @@ VALUES (
 
   --
   -- Index pour la table `Utilisateurs`
-  --
-  -- ALTER TABLE `Utilisateurs`
-  --   ADD PRIMARY KEY (`libelle`);
+  
+  ALTER TABLE `Utilisateurs`
+    ADD COLUMN habil char(1) DEFAULT NULL; 
+  -- Index pour la table `Competition`
+  
+  ALTER TABLE `Competition`
+    ADD COLUMN idSponsor varchar(250) DEFAULT NULL; 
+    ADD COLUMN dateDebut DATE DEFAULT NULL ;
+    ADD KEY `competitionFK` (`idSponsor`);
+    MODIFY `idSponsor` smallint(6) DEFAULT NULL;
+    MODIFY `idClub` varchar(8) DEFAULT NULL;
+
+    ADD CONSTRAINT `SponsorFK` FOREIGN KEY (`idSponsor`) REFERENCES `sponsor` (`id`);
+    ADD CONSTRAINT `ClubFK` FOREIGN KEY (`idClub`) REFERENCES `club` (`code`);
+
+  -- Index pour la table `sponsor`
+  
+  ALTER TABLE `Sponsor`
+    ADD PRIMARY KEY (`id`);
+  -- Index pour la table `club`
+  
   -- --
   -- -- Index pour la table `categorieAge`
   -- --

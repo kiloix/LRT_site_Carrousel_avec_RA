@@ -5,9 +5,8 @@ session_start();
           <?php
 include "menu.html";
 
-if(isset ($_GET["action"])&& isset($_GET["modele"])){
+if(isset ($_GET["action"])){
     $action = strtolower($_GET['action']);
-    $modele = strtolower($_GET['modele']);
 
 }else{
     $action='init';
