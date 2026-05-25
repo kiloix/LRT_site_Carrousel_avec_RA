@@ -36,6 +36,22 @@ class Competition
     }
 
     // Recuperation et affichage d'un club saisis dans un formulaire.
+    public function fetchAll()
+    {
+        require "connexionServBD_local.php";
+        $sql = "SELECT code, ville, nom, idClub, dateDebut, idSponsor  FROM competition";
+
+        $resultat = $bd->query($sql) or die (print_r($bd->errorInfo(), true));
+        while ($ligne = $resultat->fetch()) {
+        
+            $this->_id = $ligne['code'];      
+            $this->_ville = $ligne["ville"];
+            $this->_nom = $ligne["nom"];
+            $this->_club = $ligne["idClub"];
+            $this->_date = $ligne["dateDebut"];
+            $this->_sponsor = $ligne["idSponsor"];
+        }
+    }
     public function retrieve($id)
     {
         require "connexionServBD_local.php";

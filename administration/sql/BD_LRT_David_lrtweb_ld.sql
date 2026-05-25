@@ -26,15 +26,7 @@
   --
   -- Structure de la table `Utilisateurs`
   --
-CREATE TABLE IF NOT EXISTS Utilisateurs (
-    `libelle` INT AUTO_INCREMENT,
-    `nom` VARCHAR(50) NOT NULL,
-    `prenom` VARCHAR(50) NOT NULL,
-    `id` VARCHAR(50) NOT NULL,
-    `motdepasse` VARCHAR(50) NOT NULL,
-    PRIMARY KEY (`libelle`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;  --
-  -- Déchargement des données de la table `Utilisateurs`
+&  -- Déchargement des données de la table `Utilisateurs`
   --
   INSERT INTO `Utilisateurs` (`libelle`, `nom`, `prenom`, `id`, `motdepasse`) 
   VALUES (NULL, "cocanalp", "jean-marc", 'jm.Cocanalp%2', SHA1('12-Soleil&BOLRT'));
@@ -45,14 +37,14 @@ CREATE TABLE IF NOT EXISTS Utilisateurs (
   -- Structure de la table `categorieAge`
   --
 
-  CREATE TABLE `categorieAge` (
-    `code` varchar(3) NOT NULL,
-    `libelle` varchar(25) DEFAULT NULL,
-    `ageDebut` smallint(6) DEFAULT NULL,
-    `ageFin` smallint(6) DEFAULT NULL,
-    PRIMARY KEY (`code`)
-  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
+    CREATE TABLE `categorieAge` (
+      `code` varchar(3) NOT NULL,
+      `libelle` varchar(25) DEFAULT NULL,
+      `ageDebut` smallint(6) DEFAULT NULL,
+      `ageFin` smallint(6) DEFAULT NULL,
+      PRIMARY KEY (`code`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+''
   --
   -- Déchargement des données de la table `categorieAge`
   --

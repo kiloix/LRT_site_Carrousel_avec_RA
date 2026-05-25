@@ -37,8 +37,8 @@ include 'modele/m-Enregistrement.php';
               echo $_GET['id']=1;
               } 
             echo '">
-                    <img src="images/icon-MODIF.png" class="logo">
-                    Modifier un club
+                    <img src="img/FG.png" width="500" height="600">
+                    
                   </a>
                   </th>
                   <th>';
@@ -75,8 +75,8 @@ include 'modele/m-Enregistrement.php';
 
               echo '<th><a href="index.php?id=' . $idLien . '">';        
                 
-                echo '<img src="images/icon-MODIF.png" class="logo">
-                    Modifier un club
+              echo '<img src="img/FD.png" width="500" height="600">
+                    
                   </a></th>
                   </table>';  
           }else{
@@ -99,8 +99,8 @@ include 'modele/m-Enregistrement.php';
       echo $_GET['id']=1;
       } 
     echo '">
-            <img src="images/icon-MODIF.png" class="logo">
-            Modifier un club
+            <img src="img/FG.png" width="500" height="600">
+            
           </a>
           </th>
           <th>';
@@ -134,8 +134,9 @@ include 'modele/m-Enregistrement.php';
 
       echo '<th><a href="index.php?id=' . $idLien . '">';        
         
-        echo '<img src="images/icon-MODIF.png" class="logo">
-            Modifier un club
+      echo '<img src="img/FD.png" width="500" height="600">
+
+            
           </a></th>
           </table>';  
           }
@@ -151,7 +152,7 @@ include 'modele/m-Enregistrement.php';
                     
                    
                    
-                    <a href="consulterClub.php?codeClub='.$ligne['code'].'><img src=images/icon-MODIF.png class="logo">Modifier un club</a>
+                    <a href="consulterClub.php?codeClub='.$ligne['code'].'><img src=images/icon-MODIF.png class="logo"></a>
                     <a href="supprimerClub.php?codeClub='.$ligne['code'].'><img src=images/icon-SUPP.png class="logo">Supprimer un club</a>
                 </tr>'; -->
 

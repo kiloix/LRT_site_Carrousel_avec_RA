@@ -46,9 +46,29 @@ class Enregistrement
     }
 
     // Recuperation et affichage d'un club saisis dans un formulaire.
+    public  function fetchAll() 
+    {
+        require "connexionServBD_local.php";
+        //On va devoir faire $this->_trucmuche
+        $sql = "SELECT id, nomAuteur, datePublication, description, urlImage  FROM enregistrement WHERE id = 2";
+
+        $resultat = $bd->query($sql) or die (print_r($bd->errorInfo(), true));
+        while ($ligne = $resultat->fetch()) 
+            {
+
+                // $codeClub = $ligne['code'];
+                // $this->_id = $ligne['code'];      
+                $this->_id = $ligne["id"];
+                $this->_url = $ligne["urlImage"];
+                $this->_nom = $ligne["nomAuteur"];
+                $this->_date = $ligne["datePublication"];
+                $this->_description = $ligne["description"];
+            }
+    }
+
     public function retrieve($id)
     {
-        require_once "connexionServBD_local.php";
+        require "connexionServBD_local.php";
         //On va devoir faire $this->_trucmuche
         $sql = "SELECT nomAuteur, datePublication, description, urlImage  FROM enregistrement WHERE id ='".$id."'";
 
