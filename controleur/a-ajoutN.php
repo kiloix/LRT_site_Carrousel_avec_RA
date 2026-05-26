@@ -5,7 +5,7 @@
 // Affichage du formulaire à compléter  
 	// $modele = "Enregistrement";
 
-	$etat = "modifN";
+	$etat = "ajoutN";
 
 	$etat2 = "initial";
 

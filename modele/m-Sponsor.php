@@ -2,34 +2,30 @@
 class Competition
 {
     //Déclaration des attributs de la classe
-    protected $_idC;                 //l'identifiant du club
-    protected $_nomC;
-    protected $_ville;
-    protected $_dateC;
-    protected $_club;
-    protected $_sponsor;
+    protected $_idS;                 //l'identifiant du club
+    protected $_nomSp;                 //l'identifiant du club
+    protected $_chemin;
+    protected $_idComp;
 
     //Déclaration du constructeur
-    public function __construct($idCompet,  $villeCompet,   $nomCompet, $dateDebut, $nomClub, $nomSponsor)    // A compléter
+    public function __construct($idSponsor,  $nomSponsor,  $cheminLogo, $idCompetition)    // A compléter
     {
-        $this->_idC = $idCompet;       // Initialisation de l'identifiant de cet objet
-        $this->_dateC = $dateDebut;
-        $this->_ville = $villeCompet;
-        $this->_nomC = $nomCompet;
-        $this->_club = $nomClub;
-        $this->_sponsor = $nomSponsor;
+        $this->_idS = $idSponsor;       // Initialisation de l'identifiant de cet objet
+        $this->_nomSp = $nomSponsor;
+        $this->_chemin = $cheminLogo;
+        $this->_idComp = $idCompetition;
     }
     
 
     
     //Déclaration de la méthode publique 'create()' qui permet d'ajouter un nouveau club à la BD
-    public function createC()
+    public function create($idSponsor, $nomSponsor, $cheminLogo, $idCompetition)
     {
         // Sert à la connexion à la base de données 
         require_once "connexionServBD.php";
         // La variable sql permet d'insérer les varaibles dans les attributs qui leur est attribuées.
         $sql = "INSERT INTO competition (code, nom, ville, idEnregistrement, idClub, idClub, idSponsor, dateDebut) 
-                VALUES ('".$this->_idC."', '".$this->_nomC."', '".$this->_ville."', '".$this->_dateC."', '".$this->_club."', '".$this->_sponsor."');";    // A compléter
+                VALUES ('".$this->_idS."', '".$this->_nomSp."', '".$this->_chemin."', '".$this->_idComp."', );";    // A compléter
         // Cette ligne permet d'executer la lecture de la base de donnée.
         $bd->exec($sql) or die(print_r($bd->errorInfo(), true));
         
@@ -78,7 +74,7 @@ class Competition
     }
 
     //On va afficher dans formulaire HTML
-    public function getCode() {
+    public function getIdC() {
         return $this->_idC; //Affichage de données de formulaire
     }  
 
@@ -91,7 +87,7 @@ class Competition
         {
             return $this->_club;
         }
-    public function getNom()
+    public function getNomCompetition()
         {
             return $this->_nomC;
         }

@@ -42,14 +42,14 @@ include 'modele/m-Enregistrement.php';
           </a>
           </th>
           <th>';
-if ($consulterTuple->getIdC()!=NULL){
+if ($consulterTuple->getCode()!=NULL){
           echo '       
             <div class="card bg-transparent" data-aos="zoom-in-up">
               <div class="bg-dark shadow rounded-5 p-0">
 
                         <img src="'.$consulterTuple->getUrlImage().'" width="582" height="327" alt="abstract image" class="img-fluid rounded-5 no-bottom-radius" loading="lazy">
                         <div class="p-5">
-                          <h3 class="fw-lighter"> Le nom de la compétition est : '.$consulterTuple->getNomCompetition().'</h3>
+                          <h3 class="fw-lighter"> Le nom de la compétition est : '.$consulterTuple->getNom().'</h3>
                           <h4 class="fw-lighter"> '.$consulterTuple->getDescription().'</h3>
                           <h5 class="fw-lighter"> L évènement se déroulera le '.$consulterTuple->getVille().'</h3>
                           <h5 class="fw-lighter"> Notre partenaire (s il y en a) est : '.$consulterTuple->getSponsor().'</h3>

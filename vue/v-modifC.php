@@ -19,7 +19,7 @@ include 'modele/m-Enregistrement.php';
 
 
         //   if (isset($consulterT<uple->verifCFetch())){
-        if ($consulterTuple->getId()==NULL){
+        if ($consulterTuple->getIdC()==NULL){
 
             echo "<h1>Partie competition</h1>";
             echo " <table>
@@ -34,7 +34,7 @@ include 'modele/m-Enregistrement.php';
                     // var_dump($consulterTuple->getId());
 
                 echo " <tr>
-                    <td>".$consulterTuple->getCode()."</td>
+                    <td>".$consulterTuple->getId()."</td>
                     <td>".$consulterTuple->getTitre()."</td>
                     <td>".$consulterTuple->getDescription()."</td>
                     <td>".$consulterTuple->getVille()."</td>
@@ -43,14 +43,14 @@ include 'modele/m-Enregistrement.php';
                     <td>".$consulterTuple->getNomAuteur()."</td>
                     <td>".$consulterTuple->getDatePublication()."</td>
                 </tr>";
-                echo"<td colspan='10'><a href=index.php?action='ajoutN'><img src=images/icon-AJOUT.png class='logo'>Ajouteur une news</a></td>";
+                echo"<td colspan='10'><a href=formAjoutClub.html><img src=images/icon-AJOUT.png class='logo'>Ajouteur une news</a></td>";
                 echo"</table>";
         //   }
         // if (isset($consulterTuple->verifEFetch())){
         }
           $consulterTuple->fetchAll();
 
-        if ($consulterTuple->getId()!=NULL){
+        if ($consulterTuple->getIdC()!=NULL){
             echo "<h1>Partie news</h1>";
             echo " <table>
                 <tr>
@@ -62,14 +62,14 @@ include 'modele/m-Enregistrement.php';
                 </tr>";
 
                 echo " <tr>
-                    <td>".$consulterTuple->getId()."</td>
+                    <td>".$consulterTuple->getIdC()."</td>
                     <td>".$consulterTuple->getNomCompetition()."</td>
                     <td>".$consulterTuple->getVille()."</td>
                     <td>".$consulterTuple->getSponsor()."</td>
                     <td>".$consulterTuple->getDateDebut()."</td>
                 </tr>";
                 echo"</table>";
-                echo"<td colspan='10'><a href=index.php?action='ajoutC'><img src=images/icon-AJOUT.png class='logo'>Ajouteur une competition</a></td>";
+                echo"<td colspan='10'><a href=formAjoutClub.html><img src=images/icon-AJOUT.png class='logo'>Ajouteur une competition</a></td>";
 
                             // var_dump($_GET['id']);
                             // var_dump($idMax);

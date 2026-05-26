@@ -201,8 +201,8 @@
   -- Déchargement des données de la table `triathlon`
   --
 
-  INSERT INTO `sponsor` (`numero`, `nom`, `typeTriathlon`, `lieu`, `dateTriathlon`, `clubOrga`) VALUES
-  (1, 'Triathlon des plaines', 'M', 'Plaines des cafres', '2024-08-12', '974CTPB'),
+  INSERT INTO `sponsor` (`id`, `nom`, `cheminLogo`, `idCompetition`) VALUES
+  (1, 'Triathlon des plaines', 'test', 1);
   (2, 'Triathlon Romaric', 'S', 'la plaine Saint-Paul', '2024-12-10', '974CNPO'),
   (3, 'Fèt Kaf Triathlon', 'XS', 'Saint-Denis', '2024-12-20', '974CAC'),
   (4, 'Triathlon vert Lagon', 'XS', 'Saint-Gilles', '2025-02-26', '974TCSD'),
