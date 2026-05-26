@@ -19,9 +19,13 @@ include 'modele/m-Enregistrement.php';
 
           $consulterCompet = new Competition(NULL, NULL, NULL, NULL, NULL, NULL);
           
-          $consulterTuple->fetchAll();
-          $consulterCompet->fetchAll();
-          //Exploiter méthode verif pour le problème.
+          $consulterTuple->verifEFetch();
+          $consulterCompet->verifCFetch();
+        //   $consulterTuple->fetchAll();
+        //   $consulterCompet->fetchAll();
+          var_dump($consulterTuple->verifEfetch());
+
+        //   if (isset($consulterT<uple->verifCFetch())){
             echo "<h1>Partie competition</h1>";
             echo " <table>
                 <tr>
@@ -52,6 +56,8 @@ include 'modele/m-Enregistrement.php';
                 </tr>";
                 echo"<td colspan='10'><a href=formAjoutClub.html><img src=images/icon-AJOUT.png class='logo'>Ajouteur un club</a></td>";
                 echo"</table>";
+        //   }
+        // if (isset($consulterTuple->verifEFetch())){
             echo "<h1>Partie news</h1>";
             echo " <table>
                 <tr>
@@ -77,7 +83,7 @@ include 'modele/m-Enregistrement.php';
                             // var_dump($_GET['id']);
                             // var_dump($idMax);
 
-          // } 
+        //   } 
           include "footer.html";
 
       ?> 

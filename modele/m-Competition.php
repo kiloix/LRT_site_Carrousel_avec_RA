@@ -2,20 +2,20 @@
 class Competition
 {
     //Déclaration des attributs de la classe
-    private $_id;                 //l'identifiant du club
-    private $_nom;
-    private $_ville;
-    private $_date;
-    private $_club;
-    private $_sponsor;
+    protected $_idC;                 //l'identifiant du club
+    protected $_nomC;
+    protected $_ville;
+    protected $_dateC;
+    protected $_club;
+    protected $_sponsor;
 
     //Déclaration du constructeur
     public function __construct($idCompet,  $villeCompet,   $nomCompet, $dateDebut, $nomClub, $nomSponsor)    // A compléter
     {
-        $this->_id = $idCompet;       // Initialisation de l'identifiant de cet objet
-        $this->_date = $dateDebut;
+        $this->_idC = $idCompet;       // Initialisation de l'identifiant de cet objet
+        $this->_dateC = $dateDebut;
         $this->_ville = $villeCompet;
-        $this->_nom = $nomCompet;
+        $this->_nomC = $nomCompet;
         $this->_club = $nomClub;
         $this->_sponsor = $nomSponsor;
     }
@@ -33,6 +33,17 @@ class Competition
         // Cette ligne permet d'executer la lecture de la base de donnée.
         $bd->exec($sql) or die(print_r($bd->errorInfo(), true));
         
+    }
+        public function verifCFetch()
+    {
+        require "connexionServBD_local4.php";
+        $sql4 = 'SELECT code, ville, nom, idClub, dateDebut, idSponsor,  FROM enregistrement
+        INNER JOIN competition ON enregistrement.id= competition.idEnregistrement 
+        WHERE competition.idEnregistrement IS NOT NULL;';
+        // -- GROUP BY competition.idEnregistrement IN (SELECT code FROM competition
+        // -- INNER JOIN enregistrement ON enregistrement.id= competition.idEnregistrement WHERE competition.idEnregistrement IS NOT NULL) ; ;
+        $resultat4 = $bd4->query($sql4) or die (print_r($bd4->errorInfo(), true)) ;
+        return $resultat4->fetchColumn(0);
     }
 
     // Recuperation et affichage d'un club saisis dans un formulaire.
@@ -78,14 +89,14 @@ class Competition
     }
 
     //On va afficher dans formulaire HTML
-    public function getId() {
-        return $this->_id; //Affichage de données de formulaire
+    public function getIdC() {
+        return $this->_idC; //Affichage de données de formulaire
     }  
 
 
     public function getDateDebut()
         {
-            return $this->_date;
+            return $this->_dateC;
         }
     public function getClub()
         {
@@ -93,7 +104,7 @@ class Competition
         }
     public function getNomCompetition()
         {
-            return $this->_nom;
+            return $this->_nomC;
         }
     public function getVille()
         {

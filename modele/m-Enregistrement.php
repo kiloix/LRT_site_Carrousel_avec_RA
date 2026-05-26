@@ -1,23 +1,25 @@
 <?php
-class Enregistrement
+require 'modele/m-Competition.php';
+
+class Enregistrement extends Competition
 {
     //Déclaration des attributs de la classe
-    private $_id;                 //l'identifiant du club
+    private $_idE;                 //l'identifiant du club
     private $_titre;
-    private $_date;
+    private $_dateE;
     private $_description;
     private $_url;
-    private $_nom;
+    private $_nomE;
 
     //Déclaration du constructeur
     public function __construct($idTuples, $titreTuples,  $descriptionTuple, $urlImage, $nomAuteur, $dateDebut)    // A compléter
     {
-        $this->_id = $idTuples;       // Initialisation de l'identifiant de cet objet
+        $this->_idE = $idTuples;       // Initialisation de l'identifiant de cet objet
         $this->_titre = $titreTuples;
         $this->_description = $descriptionTuple;
         $this->_url = $urlImage;
-        $this->_date = $dateDebut;
-        $this->_nom = $nomAuteur;
+        $this->_dateE = $dateDebut;
+        $this->_nomE = $nomAuteur;
     }
     
 
@@ -35,51 +37,93 @@ class Enregistrement
         
     }
 
-        public function verif($id)
+    //     public function verif($id)
+    // {
+    //     require "connexionServBD_local4.php";
+    //     $sql4 = 'SELECT COUNT(code) FROM competition
+    //     INNER JOIN enregistrement ON enregistrement.id= competition.idEnregistrement 
+    //     WHERE competition.idEnregistrement ='.$id.' ; ';
+    //     $resultat4 = $bd4->query($sql4) or die (print_r($bd4->errorInfo(), true)) ;
+    //     return $resultat4->fetchColumn(0);
+    // }
+        public function verifEFetch()
     {
         require "connexionServBD_local4.php";
-        $sql4 = 'SELECT COUNT(code) FROM competition
-        INNER JOIN enregistrement ON enregistrement.id= competition.idEnregistrement 
-        WHERE competition.idEnregistrement ='.$id.' ; ';
+        $sql4 = 'SELECT id, nomAuteur, datePublication, description, urlImage  
+         FROM enregistrement
+        WHERE id NOT IN 
+        (SELECT id FROM enregistrement
+        INNER JOIN competition ON enregistrement.id= competition.idEnregistrement 
+        WHERE competition.idEnregistrement IS NOT NULL);';
+        // -- GROUP BY competition.idEnregistrement IN (SELECT code FROM competition
+        // -- INNER JOIN enregistrement ON enregistrement.id= competition.idEnregistrement WHERE competition.idEnregistrement IS NOT NULL) ; ;
         $resultat4 = $bd4->query($sql4) or die (print_r($bd4->errorInfo(), true)) ;
         return $resultat4->fetchColumn(0);
     }
 
     // Recuperation et affichage d'un club saisis dans un formulaire.
-    public  function fetchAll() 
-    {
-        require "connexionServBD_local.php";
-        //On va devoir faire $this->_trucmuche
-        $sql = "SELECT id, nomAuteur, datePublication, description, urlImage  FROM enregistrement WHERE id = 2";
-
-        $resultat = $bd->query($sql) or die (print_r($bd->errorInfo(), true));
-        while ($ligne = $resultat->fetch()) 
-            {
-
-                // $codeClub = $ligne['code'];
-                // $this->_id = $ligne['code'];      
-                $this->_id = $ligne["id"];
-                $this->_url = $ligne["urlImage"];
-                $this->_nom = $ligne["nomAuteur"];
-                $this->_date = $ligne["datePublication"];
-                $this->_description = $ligne["description"];
-            }
-    }
 
     public function retrieve($id)
     {
-        require "connexionServBD_local.php";
-        //On va devoir faire $this->_trucmuche
-        $sql = "SELECT nomAuteur, datePublication, description, urlImage  FROM enregistrement WHERE id ='".$id."'";
+        require "connexionServBD_local4.php";
+        //Etape de verification des news si c'est une compettion ou news classique.
+        $sql4 = 'SELECT COUNT(code) FROM competition
+        INNER JOIN enregistrement ON enregistrement.id= competition.idEnregistrement 
+        WHERE competition.idEnregistrement ='.$id.' ; ';
+        $resultat4 = $bd4->query($sql4) or die (print_r($bd4->errorInfo(), true)) ;
+        
+        if ($resultat4->fetchColumn(0) == 1){
+            require "connexionServBD_local.php";
+            $consulterCompet = new Competition($id, NULL, NULL, NULL, NULL, NULL);
 
-        $resultat = $bd->query($sql) or die (print_r($bd->errorInfo(), true));
-        $ligne = $resultat->fetch(); // <- important fetch c'est bo ntant que $ligne existe
-        // $codeClub = $ligne['code'];
-        // $this->_id = $ligne['code'];      
-        $this->_url = $ligne["urlImage"];
-        $this->_nom = $ligne["nomAuteur"];
-        $this->_date = $ligne["datePublication"];
-        $this->_description = $ligne["description"];
+            $sql = "SELECT competition.code, competition.ville, competition.nom, competition.dateDebut, competition.idSponsor, enregistrement.nomAuteur,  enregistrement.datePublication,  enregistrement.description,  enregistrement.urlImage 
+            FROM enregistrement 
+            INNER JOIN competition ON enregistrement.id= competition.idEnregistrement 
+            WHERE id ='".$id."';";
+                     
+
+            $resultat = $bd->query($sql) or die (print_r($bd->errorInfo(), true));
+            $ligne = $resultat->fetch(); // <- important fetch c'est bo ntant que $ligne existe
+            $this->_idC = $ligne['code'];      
+            $this->_ville = $ligne["ville"];
+            $this->_nomC = $ligne["nom"];
+            $this->_dateC = $ligne["dateDebut"];
+            $this->_sponsor = $ligne["idSponsor"];
+            $this->_url = $ligne["urlImage"];
+            $this->_nomE = $ligne["nomAuteur"];
+            $this->_dateE = $ligne["datePublication"];
+            $this->_description = $ligne["description"];
+            
+                    $sql = "SELECT code, ville, nom, idClub, dateDebut, idSponsor  FROM competition WHERE idEnregistrement ='".$id."'";
+
+                    $resultat = $bd->query($sql) or die (print_r($bd->errorInfo(), true));
+                    $ligne = $resultat->fetch(); // <- important fetch c'est bo ntant que $ligne existe
+                                $consulterTuple = new Enregistrement($id, NULL, NULL, NULL, NULL, NULL);
+
+            // $consulterCompet->retrieve($id);
+
+                    //    foreach ($ligne as $data){
+                    //     return $ligne[$data];
+                    // }
+        }else{
+            require "connexionServBD_local.php";
+            //On va devoir faire $this->_trucmuche
+            $sql = "SELECT id, nomAuteur, datePublication, description, urlImage  FROM enregistrement WHERE id ='".$id."'";
+
+            $resultat = $bd->query($sql) or die (print_r($bd->errorInfo(), true));
+            $ligne = $resultat->fetch(); // <- important fetch c'est bo ntant que $ligne existe
+            // $codeClub = $ligne['code'];
+            // $this->_id = $ligne['code'];
+            $this->_idC = NULL;      
+            $this->_ville = NULL;
+            $this->_nomC = NULL;
+            $this->_dateC = NULL;
+            $this->_sponsor = NULL;      
+            $this->_url = $ligne["urlImage"];
+            $this->_nomE = $ligne["nomAuteur"];
+            $this->_dateE = $ligne["datePublication"];
+            $this->_description = $ligne["description"];
+        }
     }
     
     public function update($codeClub){
@@ -94,7 +138,7 @@ class Enregistrement
 
     //On va afficher dans formulaire HTML
     public function getId() {
-        return $this->_id; //Affichage de données de formulaire
+        return $this->_idE; //Affichage de données de formulaire
     }  
 
     public function getTitre() {
@@ -107,11 +151,11 @@ class Enregistrement
         }
     public function getDatePublication()
         {
-            return $this->_date;
+            return $this->_dateE;
         }
     public function getNomAuteur()
         {
-            return $this->_nom;
+            return $this->_nomE;
         }
     public function getUrlImage()
         {
